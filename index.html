@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Present</title>
+
+    <style>
+* {
+    user-select: none;
+}
+*[hidden] {
+    display: none;
+}
+body {
+    margin: 0;
+    background: #000;
+    overflow: hidden;
+}
+
+#images {
+    --s: 0;
+    display: flex;
+    align-items: center;
+
+    height: 100vh;
+    height: 100dvh;
+
+    img {
+        width: 100vw;
+        flex-shrink: 0;
+    }
+
+    transform: translateX(calc(-100vw * var(--s)));
+    transition: .5s;
+}
+#end {
+    position: relative;
+
+    flex-shrink: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+        text-align: center;
+        margin: 0;
+
+        font-family: Arial;
+        color: #fff;
+        font-size: 3vh;
+    }
+}
+    </style>
+</head>
+<body>
+    <main id="images" style="--s: 0;">
+        <div id="end">
+            <p>Loading...</p>
+        </div>
+    </main>
+    <script>
+        const data = {
+            test: 3,
+        };
+
+        const query = window.location.search.slice(1);
+        const images = document.getElementById('images');
+        const valid = Object.keys(data).includes(query);
+        if (!valid)
+            images.innerHTML = '<div id="end"><p>Couldn\'t find presentation</p></div>';
+        else
+            images.innerHTML = Array.from({ length: data[query] },
+                (_,i) => `<img src="/${query}/${i+1}.jpg">`
+            ).join('') + '<div id="end"><p>End of presentation</p></div>';
+
+        let current = 0;
+        function slide(dir) {
+            if (!valid || current + dir < 0 || current + dir > data[query]) return
+            current += dir;
+            images.style.setProperty('--s', current);
+        }
+
+        document.addEventListener('keydown', e => {
+            if (['ArrowLeft', 'a', 'Backspace'].includes(e.key)) slide(-1);
+            else if (['ArrowRight', 'd', ' ', 'Enter'].includes(e.key)) slide(1);
+        });
+        document.addEventListener('mousedown', e => {
+            const x = e.clientX / window.innerWidth;
+            if (.4 < x && x < .6) return;
+            slide(x >= .5 ? 1 : -1);
+        })
+    </script>
+</body>
+</html>
