@@ -173,32 +173,32 @@ dialog {
 		</div>
 	</dialog>
 	<main id="images" style="--s: 0;"></main>
-	<div id="end"></div>
 	<script>
-		const data = {
-			catch: 3,
-		};
+		const data = {};
 
 		let presenting = false;
 		const menu = document.getElementById('menu');
 
 		const query = window.location.search.slice(1);
 		const images = document.getElementById('images');
-		const valid = Object.keys(data).includes(query);
-		if (!valid) {
-			document.getElementById('modal').hidden = true;
-			document.getElementById('error').hidden = false;
-		} else {
-			document.getElementById('download').href = `/${query}/p.sb3`;
 
-			const inner = Array.from({ length: data[query] },
-				(_,i) => `<img src="/${query}/Slide${i+1}.jpg">`
-			).join('');
-			images.innerHTML = inner + `<div id="end" style="--i: ${data[query]};">${inner}</div>`;
-			document.getElementById('name').textContent = query.slice(0, 1).toUpperCase() + query.slice(1);
-		}
-		menu.showModal();
-
+		fetch('/data.json').then(d => d.json()).then(r => {
+			data = r;
+			if (!Object.keys(data).includes(query)) {
+				document.getElementById('modal').hidden = true;
+				document.getElementById('error').hidden = false;
+			} else {
+				document.getElementById('download').href = `/${query}/p.sb3`;
+	
+				const inner = Array.from({ length: data[query] },
+					(_,i) => `<img src="/${query}/Slide${i+1}.jpg">`
+				).join('');
+				images.innerHTML = inner + `<div id="end" style="--i: ${data[query]};">${inner}</div>`;
+				document.getElementById('name').textContent = query.slice(0, 1).toUpperCase() + query.slice(1);
+			}
+			menu.showModal();
+	    });
+		
 		function start() {
 			menu.close();
 			presenting = true;
