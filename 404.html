@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Present</title>
+
+	<style>
+:root {
+	--bg: #000;
+	--cover: #00000277;
+	--fg: #252527;
+	--fg2: #353537;
+	--fg3: #454547;
+	--fg2h: #404042;
+	--fg3h: #505052;
+}
+*[hidden] {
+	display: none !important;
+}
+body {
+	margin: 0;
+	background: var(--bg);
+	overflow: hidden;
+}
+
+#images {
+	--s: 0;
+	display: flex;
+	align-items: center;
+	user-select: none;
+	height: 100vh;
+	height: 100dvh;
+	transform: translateX(calc(-100vw * var(--s)));
+	transition: .5s;
+}
+#images img {
+	height: 100%;
+	width: 100vw;
+	flex-shrink: 0;
+	object-fit: contain;
+	user-select: none;
+}
+	</style>
+</head>
+<body>
+	<main id="images" style="--s: 0;"></main>
+	<script>
+		let data = {};
+
+    let presenting = false;
+		const query = window.location.pathname.slice(1);
+		const images = document.getElementById('images');
+
+    fetch('/data.json').then(d => d.json()).then(r => {
+      data = r;
+      if (Object.keys(data).includes(query)) {
+  			images.innerHTML = Array.from({ length: data[query] },
+  				(_,i) => `<img src="/${query}/Slide${i+1}.jpg">`
+  			).join('');
+        presenting = true;
+      }
+    });
+
+		let current = 0;
+		function slide(dir) {
+			if (!valid || current + dir < 0 || current + dir > data[query]) return
+			current += dir;
+			images.style.setProperty('--s', current);
+		}
+
+		document.addEventListener('keydown', e => {
+      if (!presenting) return;
+			if (['ArrowLeft', 'a', 'Backspace'].includes(e.key)) slide(-1);
+			else if (['ArrowRight', 'd', ' ', 'Enter'].includes(e.key)) slide(1);
+		});
+		document.addEventListener('mousedown', e => {
+      if (!presenting) return;
+			const x = e.clientX / window.innerWidth;
+			if (.4 < x && x < .6) return;
+			slide(x >= .5 ? 1 : -1);
+		});
+	</script>
+</body>
+</html>
