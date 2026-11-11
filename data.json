@@ -1,3 +1,8 @@
 {
-  "catch": 3
+  "catch": 3,
+  "cookie": 8,
+  "egg": 6,
+  "maze": 5,
+  "mouse": 4,
+  "penguin": 5
 }
