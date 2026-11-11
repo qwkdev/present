@@ -193,7 +193,7 @@ dialog {
 				const inner = Array.from({ length: data[query] },
 					(_,i) => `<img src="/${query}/Slide${i+1}.jpg">`
 				).join('');
-				images.innerHTML = inner + `<div id="end" style="--i: ${data[query]/2};">${inner}</div>`;
+				images.innerHTML = inner + `<div id="end" style="--i: ${data[query] > 4 ? data[query]/2 : data[query]};">${inner}</div>`;
 				document.getElementById('name').textContent = query.slice(0, 1).toUpperCase() + query.slice(1);
 			}
 			menu.showModal();
