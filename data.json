@@ -1,8 +1,8 @@
 {
-  "catch": 3,
-  "cookie": 8,
-  "egg": 6,
-  "maze": 5,
-  "mouse": 4,
-  "penguin": 5
+	"cookie": [8, "Cookie Clicker", "Replica clicker game with upgrades and autoclick"],
+	"catch": [3, "Catch Fruit", "Catch falling fruit in a basket"],
+	"egg": [6, "Run From Egg", "Game where you run from an egg"],
+	"maze": [5, "Simple Maze", "Basic maze template, try add extras yourself for a challenge"],
+	"mouse": [4, "Mouse Friends", "Try and catch a mouse thats running from you"],
+	"penguin": [5, "Catch Penguin", "Catch a bouncing penguin without letting it hit the ground"]
 }
