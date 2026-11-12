@@ -183,7 +183,7 @@ dialog {
 		const images = document.getElementById('images');
 
 		fetch('/data.json').then(d => d.json()).then(r => {
-			data = r;
+			data = Object.fromEntries(Object.entries(r).map(([k, v]) => [k, v[0]]));
 			if (!Object.keys(data).includes(query)) {
 				document.getElementById('modal').hidden = true;
 				document.getElementById('error').hidden = false;

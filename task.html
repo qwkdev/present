@@ -53,7 +53,7 @@ body {
 		const images = document.getElementById('images');
 
 		fetch('/data.json').then(d => d.json()).then(r => {
-			data = r;
+			data = Object.fromEntries(Object.entries(r).map(([k, v]) => [k, v[0]]));
 			if (Object.keys(data).includes(query)) {
 				images.innerHTML = Array.from({ length: data[query] },
 					(_,i) => `<img src="/${query}/Slide${i+1}.jpg">`
