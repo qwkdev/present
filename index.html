@@ -10,7 +10,7 @@
 	--u: 1.5vw;
 	--bg: #111;
 	--fg: #fff;
-	--border: #fff2;
+	--border: #000;
 	--text: #000;
 }
 body {
@@ -37,7 +37,7 @@ a {
 	display: block;
 	width: 100%;
 	box-sizing: border-box;
-	padding: calc(1 * var(--u));
+	padding-bottom: calc(1.4 * var(--u));
 	margin-top: calc(2 * var(--u));
 	text-decoration: none;
 	color: var(--text);
@@ -50,10 +50,22 @@ a {
 		border-radius: calc(2 * var(--u));
 	}
 	button {
-		width: 100%;
+		width: calc(100% - 3 * var(--u));
+        height: calc(4 * var(--u));
 		box-sizing: border-box;
-		margin: 0 calc(1 * var(--u));
+		margin: 0 calc(1.5 * var(--u));
 		border-radius: calc(1 * var(--u));
+
+        border: calc(.1 * var(--u)) solid var(--border);
+        background: var(--fg);
+        transition: .2s;
+
+        &:hover {
+            transform: scale(1.02);
+        }
+        &:active {
+            transform: scale(0.98);
+        }
 	}
 }
 
@@ -65,29 +77,29 @@ a {
 	</style>
 </head>
 <body>
-	<!-- <a href="#">
-		<img src="https://picsum.photos/400/250">
+	<a href="#">
+		<img src="/i.jpg">
 		<h2>Catch</h2>
 		<p>Description about game</p>
 		<button>View Presentation</button>
 	</a>
 	<a href="#">
-		<img src="https://picsum.photos/400/250">
+		<img src="/i.jpg">
 		<h2>Catch</h2>
 		<p>Description about game</p>
 		<button>View Presentation</button>
 	</a>
 	<a href="#">
-		<img src="https://picsum.photos/400/250">
+		<img src="/i.jpg">
 		<h2>Catch</h2>
 		<p>Description about game</p>
 		<button>View Presentation</button>
 	</a>
 	<a href="#">
-		<img src="https://picsum.photos/400/250">
+		<img src="/i.jpg">
 		<h2>Catch</h2>
 		<p>Description about game</p>
 		<button>View Presentation</button>
-	</a> -->
+	</a>
 </body>
 </html>
