@@ -39,12 +39,13 @@ body::-webkit-scrollbar {
 	display: block;
 	width: 100%;
 	box-sizing: border-box;
-	padding-bottom: calc(1.4 * var(--u));
+	padding-bottom: calc(6.9 * var(--u));
 	margin-top: calc(2 * var(--u));
 	text-decoration: none;
 	color: var(--text);
 	font-family: Arial;
 	transition: .2s;
+	position: relative;
 }
 #links a:hover {
 	transform: scale(1.02);
@@ -70,8 +71,12 @@ body::-webkit-scrollbar {
 #links a button {
 	width: calc(100% - 3 * var(--u));
 	box-sizing: border-box;
-	margin: 0 calc(1.5 * var(--u));
-	margin-top: calc(1.5 * var(--u));
+
+	position: absolute;
+	bottom: calc(1.4 * var(--u));
+	left: 50%;
+	transform: translateX(-50%);
+
 	height: calc(4 * var(--u));
 	font-size: calc(2 * var(--u));
 	border-radius: calc(1 * var(--u));
@@ -81,7 +86,7 @@ body::-webkit-scrollbar {
 	transition: .2s;
 }
 #links a button:hover {
-	transform: scale(1.02, 1.025);
+	transform: translateX(-50%) scale(1.02, 1.025);
 }
 
 @media screen and (min-aspect-ratio: 2/3) {
